@@ -1,0 +1,19 @@
+name: github.com/opspec-pkgs/golang.generate
+description: runs go:generate commands from golang src code
+inputs:
+  srcDir:
+    dir:
+      description: source code
+      default: .
+outputs:
+  srcDir:
+    dir:
+      description: formatted source code
+version: 1.0.0
+run:
+  container:
+    cmd: [ go, generate, ./... ]
+    dirs:
+      /go/src: srcDir
+    image: { ref: 'golang:1.9beta2-alpine' }
+    workDir: /go/src
